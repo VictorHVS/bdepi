@@ -5,6 +5,7 @@
     <title>Leaflet Draw</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
     <style>
         body { margin:0; padding:0; }
@@ -68,7 +69,7 @@
 
 <div>
     <nav id='map-ui' class='menu-ui'>
-        <a href='#' class='active' id='salvar'>Salvar</a>
+        <a class='active' id='salvar'>Salvar</a>
     </nav>
 </div>
 
@@ -91,8 +92,26 @@
         featureGroup.addLayer(e.layer);
     });
 
-</script>
+    jQuery(document).ready(function(){
+        jQuery('#salvar').click(function(){
+            var dados = JSON.stringify(featureGroup.toGeoJSON());
+                jQuery.ajax({
+                    type: "POST",
+                    url: "/save",
+                    data: dados,
+                    error: function(xhr, status, error) {
+                        console.log(error + " status: " + status);
+                    },
+                    success: function (data, status) {
+                        console.log("response: " + data + " status: " + status);
+                    }
+                });
 
+            return false;
+        });
+    });
+
+</script>
 
 </body>
 </html>

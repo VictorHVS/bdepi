@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Dados;
 use App\Http\Requests;
+use Illuminate\Http\Request;
+use Phaza\LaravelPostgis\Geometries\Point;
 
 class MainController extends Controller
 {
@@ -15,6 +17,37 @@ class MainController extends Controller
         $dados = Dados::all();
 
         return view('index')->with("dados", $this->geoJson($dados));
+    }
+
+    public function save(Request $request){
+
+        $featuresCollection = json_decode($request->getContent());
+        $features = $featuresCollection->features;
+        $faker = \Faker\Factory::create();
+
+        foreach ($features as $key => $value) {
+
+            if(!isset($value->properties->id)){
+                $dado = new Dados();
+                $dado->geom = new Point($value->geometry->coordinates[1], $value->geometry->coordinates[0]);
+                $dado->nome = $faker->name;
+                $dado->info = "nada";
+                $dado->save();
+            }
+            else if(Dados::all()->where("id", $value->properties->id)){
+                $dado = Dados::all()->where("id", $value->properties->id)->first();
+                $dado->id = $value->properties->id;
+                $dado->nome = $faker->name;
+                $dado->geom = new Point($value->geometry->coordinates[1], $value->geometry->coordinates[0]);
+                $dado->info = "nada";
+
+//                echo $dado->geom;
+//                exit;
+                $dado->save();
+            }
+        };
+
+        return response()->json($request->getContent());
     }
 
     public function create(){
@@ -34,6 +67,7 @@ class MainController extends Controller
                 'properties' => array(
                     'title' => $value->nome,
                     'description' => $value->info,
+                    'id' => $value->id,
                     'marker-color' => "#fc" . rand(1, 9999),
                     'marker-size' => "large"
                 )
