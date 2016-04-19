@@ -40,9 +40,30 @@ class MainController extends Controller
                 $dado->nome = $faker->name;
                 $dado->geom = new Point($value->geometry->coordinates[1], $value->geometry->coordinates[0]);
                 $dado->info = "nada";
+                $dado->save();
+            }
+        };
 
-//                echo $dado->geom;
-//                exit;
+        return response()->json($request->getContent());
+    }
+
+    public function delete(Request $request){
+
+        $features = json_decode($request->getContent());
+
+        foreach ($features as $key => $value) {
+
+            if(!isset($value->properties->id)){
+                $dado = Dados::find($value->properties->id);
+                dd($dado);
+                $dado->delete();
+            }
+            else if(Dados::all()->where("id", $value->properties->id)){
+                $dado = Dados::all()->where("id", $value->properties->id)->first();
+                $dado->id = $value->properties->id;
+                $dado->geom = new Point($value->geometry->coordinates[1], $value->geometry->coordinates[0]);
+                $dado->info = "nada";
+
                 $dado->save();
             }
         };

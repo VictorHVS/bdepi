@@ -79,6 +79,7 @@
         .setView([38.89399, -77.03659], 2);
 
     var geojson = {!! $dados !!};
+    var geoJsonDeleted = [];
 
     var featureGroup = L.geoJson(geojson).addTo(map);
 
@@ -88,12 +89,34 @@
         }
     }).addTo(map);
 
+    map.on('draw:deleted', function (e) {
+        var layers = e.layers;
+        layers.eachLayer(function (layer) {
+            //do whatever you want, most likely save back to db
+            geoJsonDeleted.push(layer.feature);
+        });
+    });
+
     map.on('draw:created', function(e) {
         featureGroup.addLayer(e.layer);
     });
 
     jQuery(document).ready(function(){
         jQuery('#salvar').click(function(){
+
+            var jsonDeleted = JSON.stringify(geoJsonDeleted);
+            jQuery.ajax({
+                type: "DELETE",
+                url: "/delete",
+                data: jsonDeleted,
+                error: function(xhr, status, error) {
+                    console.log(error + " status: " + status);
+                },
+                success: function (data, status) {
+                    console.log("response: " + data + " status: " + status);
+                }
+            });
+
             var dados = JSON.stringify(featureGroup.toGeoJSON());
                 jQuery.ajax({
                     type: "POST",
