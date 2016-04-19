@@ -14,4 +14,4 @@
 Route::get("/", 'MainController@index');
 Route::get("/create", 'MainController@create');
 Route::post("/save", 'MainController@save');
-Route::delete("/save", 'MainController@delete');
+Route::delete("/delete", 'MainController@delete');

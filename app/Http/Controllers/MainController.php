@@ -50,25 +50,17 @@ class MainController extends Controller
     public function delete(Request $request){
 
         $features = json_decode($request->getContent());
-
+        $dado = null;
         foreach ($features as $key => $value) {
+            if( isset($value->properties->id) ){
 
-            if(!isset($value->properties->id)){
                 $dado = Dados::find($value->properties->id);
-                dd($dado);
-                $dado->delete();
-            }
-            else if(Dados::all()->where("id", $value->properties->id)){
-                $dado = Dados::all()->where("id", $value->properties->id)->first();
-                $dado->id = $value->properties->id;
-                $dado->geom = new Point($value->geometry->coordinates[1], $value->geometry->coordinates[0]);
-                $dado->info = "nada";
-
-                $dado->save();
+                if(!empty($dado))
+                    $dado->delete();
             }
         };
 
-        return response()->json($request->getContent());
+        return response()->json($dado);
     }
 
     public function create(){

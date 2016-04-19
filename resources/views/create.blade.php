@@ -117,6 +117,8 @@
                 }
             });
 
+            //console.log(jsonDeleted);
+
             var dados = JSON.stringify(featureGroup.toGeoJSON());
                 jQuery.ajax({
                     type: "POST",
