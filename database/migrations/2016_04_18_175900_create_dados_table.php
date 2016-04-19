@@ -21,6 +21,7 @@ class CreateDadosTable extends Migration
             $table->string('info')->nullable();
             $table->string('valor')->nullable();
             $table->point('geom')->nullable();
+
         });
     }
 

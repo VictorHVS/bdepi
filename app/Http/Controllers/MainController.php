@@ -17,6 +17,12 @@ class MainController extends Controller
         return view('index')->with("dados", $this->geoJson($dados));
     }
 
+    public function create(){
+        $dados = Dados::all();
+
+        return view('create')->with("dados", $this->geoJson($dados));
+    }
+
     function geoJson($dados)
     {
         $features = array();

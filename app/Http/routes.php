@@ -12,3 +12,5 @@
 */
 
 Route::get("/", 'MainController@index');
+Route::get("/create", 'MainController@create');
+Route::post("/create", 'MainController@create');
