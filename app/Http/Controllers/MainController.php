@@ -30,8 +30,6 @@ class MainController extends Controller
             if(!isset($value->properties->id)){
                 $dado = new Dados();
                 $dado->geom = new Point($value->geometry->coordinates[1], $value->geometry->coordinates[0]);
-                $dado->nome = $faker->name;
-                $dado->info = "nada";
                 $dado->save();
             }
             else if(Dados::all()->where("id", $value->properties->id)){

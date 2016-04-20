@@ -14,7 +14,6 @@ class CreateDadosTable extends Migration
     public function up()
     {
         Schema::create('dados', function (Blueprint $table) {
-            $table->enablePostgis();
             $table->increments('id');
             $table->timestamps();
             $table->dateTime('data_coleta')->nullable();
@@ -23,7 +22,7 @@ class CreateDadosTable extends Migration
             $table->string('valor')->nullable();
             $table->point('geom')->nullable();
             $table->geometrycollection("geomCollection", 4326, 2, true); //4326
-            //$table->)
+
         });
     }
 
