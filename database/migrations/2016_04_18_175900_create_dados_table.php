@@ -14,6 +14,7 @@ class CreateDadosTable extends Migration
     public function up()
     {
         Schema::create('dados', function (Blueprint $table) {
+            $table->enablePostgis();
             $table->increments('id');
             $table->timestamps();
             $table->dateTime('data_coleta')->nullable();
