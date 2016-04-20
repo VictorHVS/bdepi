@@ -23,7 +23,7 @@ class MainController extends Controller
 
         $featuresCollection = json_decode($request->getContent());
         $features = $featuresCollection->features;
-        $faker = \Faker\Factory::create();
+//        $faker = \Faker\Factory::create();
 
         foreach ($features as $key => $value) {
 
@@ -35,7 +35,7 @@ class MainController extends Controller
             else if(Dados::all()->where("id", $value->properties->id)){
                 $dado = Dados::all()->where("id", $value->properties->id)->first();
                 $dado->id = $value->properties->id;
-                $dado->nome = $faker->name;
+                $dado->nome = "temp";
                 $dado->geom = new Point($value->geometry->coordinates[1], $value->geometry->coordinates[0]);
                 $dado->info = "nada";
                 $dado->save();
