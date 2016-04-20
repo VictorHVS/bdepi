@@ -17,11 +17,11 @@ class CreateDadosTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->dateTime('data_coleta')->nullable();
-            $table->string('nome');
+            $table->string('nome')->nullable();
             $table->string('info')->nullable();
             $table->string('valor')->nullable();
             $table->point('geom')->nullable();
-            $table->geometrycollection("geomCollection", 4326, 2, true); //4326
+            $table->geometrycollection("geomCollection", 4326, 2, true)->nullable(); //4326
 
         });
     }
