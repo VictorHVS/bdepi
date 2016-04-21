@@ -16,6 +16,11 @@
 
 <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.3/leaflet.draw.css' rel='stylesheet' />
 <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.3/leaflet.draw.js'></script>
+<script data-rocketsrc="//code.jquery.com/jquery-1.10.2.min.js" type="text/rocketscript"></script>
+// markcluster
+<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
+<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
 
 <div id='map'></div>
 
@@ -81,7 +86,15 @@
     var geojson = {!! $dados !!};
     var geoJsonDeleted = [];
 
-    var featureGroup = L.geoJson(geojson).addTo(map);
+    var markers = L.markerClusterGroup();
+    var geoJsonLayer = L.geoJson(geojson, {
+        onEachFeature: function (feature, layer) {
+            layer.bindPopup("AEHOOO!!!");
+        }
+    });
+    markers.addLayer(geoJsonLayer);
+    map.addLayer(markers);
+    map.fitBounds(markers.getBounds());
 
     var drawControl = new L.Control.Draw({
         edit: {

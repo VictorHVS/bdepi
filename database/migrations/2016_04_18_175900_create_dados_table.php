@@ -21,7 +21,7 @@ class CreateDadosTable extends Migration
             $table->string('info')->nullable();
             $table->string('valor')->nullable();
             $table->point('geom')->nullable();
-            $table->geometrycollection("geomCollection", 4326, 2, true)->nullable(); //4326
+            $table->geography("geomCollection", 4326, 2, false)->nullable(); //4326
 
         });
     }

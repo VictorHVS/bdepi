@@ -22,6 +22,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 $factory->define(App\Dados::class, function (Faker\Generator $faker) {
     return [
         'geom' => new \Phaza\LaravelPostgis\Geometries\Point($faker->latitude, $faker->longitude),
+        'geomCollection' => new \Phaza\LaravelPostgis\Geometries\GeometryCollection(array()),
         'data_coleta' => $faker->dateTime,
         'nome' => $faker->text(10),
         'info' => $faker->realText(50),
