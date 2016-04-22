@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Dados;
+use App\Dado;
 use App\Http\Requests;
 use GeoJson\GeoJson;
 use GeoJson\Tests\Geometry\GeometryCollectionTest;
@@ -18,7 +18,7 @@ class MainController extends Controller
     {
 //        $dados = file_get_contents(__DIR__ . '/../assets/dado.json');
 
-        $dados = Dados::all();
+        $dados = Dado::all();
 
         return view('index')->with("dados", $this->toGeoJSON($dados));
     }
@@ -34,13 +34,13 @@ class MainController extends Controller
             //dd($ae->jsonSerialize());
 
             if(!isset($value->properties->id)){
-                $dado = new Dados();
+                $dado = new Dado();
                 //$dado->geomCollection = new GeometryCollection([$value->geometry]);
                 $dado->geom = new Point($value->geometry->coordinates[1], $value->geometry->coordinates[0]);
                 $dado->save();
             }
-            else if(Dados::all()->where("id", $value->properties->id)){
-                $dado = Dados::all()->where("id", $value->properties->id)->first();
+            else if(Dado::all()->where("id", $value->properties->id)){
+                $dado = Dado::all()->where("id", $value->properties->id)->first();
                 $dado->id = $value->properties->id;
                 $dado->nome = "temp";
                 $dado->geom = new Point($value->geometry->coordinates[1], $value->geometry->coordinates[0]);
@@ -59,7 +59,7 @@ class MainController extends Controller
         foreach ($features as $key => $value) {
             if( isset($value->properties->id) ){
 
-                $dado = Dados::find($value->properties->id);
+                $dado = Dado::find($value->properties->id);
                 if(!empty($dado))
                     $dado->delete();
             }
@@ -69,7 +69,7 @@ class MainController extends Controller
     }
 
     public function create(){
-        $dados = Dados::all();
+        $dados = Dado::all();
 
         return view('create')->with("dados", $this->toGeoJSON($dados));
     }
