@@ -16,51 +16,15 @@
 
 <body>
     <div class="center-top">
-        <!--        <h3 class="text-center title">Banco de Dados Geográficos</h3>-->
-        <div class="col-md-offset-1 col-md-6">
-            <div class="search padding-zero">
-                <div class="col-sm-10 padding-zero">
-                    <input id="search" onkeyup="load()" type="search" class="search-input">
-                </div>
-                <div class="col-sm-2 padding-zero">
-                    <input type="submit" value="Buscar" onclick="search()" class="btn btn-search">
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="col-md-12 navbar-right">
-                <button onclick="callNovo()" class="btn btn-card navbar-right">Novo</button>
-            </div>
-        </div>
+        
     </div>
-
+    
     <div class="col-md-10 col-md-offset-1">
-        <div class="col-md-12">
-
-
-            <!-- modelo card-->
-            <div class="col-md-12  card">
-                <a href="#" class="card-title">Relato de Desenvolvimento de Plataforma de Gerência de Dados Espaciais</a>
-                <br>
-                <p class="card-label">Autores:
-                    <p class="card-autor">Lucas Nogueira e Victor Hugo</p>
-                </p>
-                <p class="card-label">Postado em:
-                    <p class="date">10/09/2015</p>
-                </p>
-                <p class="card-description"></p>
-
-                <span class="label label-default">Default</span>
-                <span class="label label-default">Default1</span>
-                <span class="label label-default">Default2</span>
-            </div>
-
-
-
-
+        <div class="form">
+            
         </div>
-
     </div>
+
 
 
     <script>
@@ -110,11 +74,6 @@
             if (key) {
                 console.log("buscar por " + key);
             }
-        }
-
-        function callNovo() {
-            var url = window.location.href.replace('index.html', 'create.html')
-            window.location.replace(url);
         }
     </script>
 </body>

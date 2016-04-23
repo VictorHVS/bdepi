@@ -1,8 +1,8 @@
 body {
-/*    padding: 50px;*/
+    /*    padding: 50px;*/
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
     background-color: #fff !important;
-/*    background-image: url(../images/bg.png);*/
+    /*    background-image: url(../images/bg.png);*/
 }
 
 a {
@@ -16,7 +16,12 @@ a {
 }
 
 .center-top {
-    margin-top: 180px;
+    margin-top: 130px;
+}
+
+.topbar {
+    height: 50px;
+    background-color: #e6e6e6;
 }
 
 .search {
@@ -49,8 +54,14 @@ a {
     background-color: coral;
 }
 
-.section-search{
+.section-search {
     height: 80vh;
     width: 100%;
     background-color: #e6e6e6;
+}
+.btn-card {
+    border-radius: 0px !important;
+    border: none;
+    background-color: coral;
+    margin: 7px;
 }
