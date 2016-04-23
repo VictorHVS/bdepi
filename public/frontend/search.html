@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>BDEPI - Banco de Dados Espaciais do Piuaí</title>
+    <link rel="stylesheet" href="css/search.css">
+    <!--    <script type="application/javascript" src="js/script.js"></script>-->
+
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+</head>
+
+<body>
+    <div class="center-top">
+        <!--        <h3 class="text-center title">Banco de Dados Geográficos</h3>-->
+        <div class="col-md-offset-3 col-md-6">
+            <div class="search padding-zero">
+                <div class="col-sm-10 padding-zero">
+                    <input id="search" onkeyup="load()" type="search" class="search-input">
+                </div>
+                <div class="col-sm-2 padding-zero">
+                    <input type="submit" value="Buscar" onclick="search()" class="btn btn-search">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-12">
+
+
+            <!-- modelo card-->
+            <div class="col-md-12  card">
+                <a href="#" class="card-title">Relato de Desenvolvimento de Plataforma de Gerência de Dados Espaciais</a><br>
+                <p class="card-label">Autores:
+                    <p class="card-autor">Lucas Nogueira e Victor Hugo</p>
+                </p>
+                <p class="card-label">Postado em:
+                    <p class="date">10/09/2015</p>
+                </p>
+                <p class="card-description"></p>
+
+                <span class="label label-default">Default</span>
+                <span class="label label-default">Default1</span>
+                <span class="label label-default">Default2</span>
+            </div>
+
+
+
+
+        </div>
+
+    </div>
+
+
+    <script>
+        $(document).ready(function () {
+
+            var key = $_GET('q');
+            key = key.replace("+", " ");
+            $("#search").val(key);
+            //            $("#search").focus();
+            search(key);
+
+        })
+
+        function $_GET(param) {
+            var vars = {};
+            window.location.href.replace(location.hash, '').replace(
+                /[?&]+([^=&]+)=?([^&]*)?/gi, // regexp
+                function (m, key, value) { // callback
+                    vars[key] = value !== undefined ? value : '';
+                }
+            );
+
+            if (param) {
+                return vars[param] ? vars[param] : null;
+            }
+            return vars;
+        }
+
+        var a;
+
+        function load() {
+            clearTimeout(a);
+            a = setTimeout(function () {
+                search($("#search").val());
+            }, 1000);
+        }
+
+        $("#search").keypress(function (event) {
+            if (event.which == 13) {
+                search($("#search").val());
+            }
+        });
+
+        function search(key) {
+            clearTimeout(a);
+            var key = key || $("#search").val();
+            if (key) {
+                console.log("buscar por " + key);
+            }
+        }
+    </script>
+</body>
+
+</html>
