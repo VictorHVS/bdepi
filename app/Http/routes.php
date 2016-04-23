@@ -11,7 +11,20 @@
 |
 */
 
-Route::get("/", 'MainController@index');
-Route::get("/create", 'MainController@create');
-Route::post("/save", 'MainController@save');
-Route::delete("/delete", 'MainController@delete');
+// quando eu tava brincando
+//Route::get('/', [ 'as' => 'home', 'uses' => 'FrontEndController@home' ]) ;
+//
+//Route::get("/create", 'MainController@create');
+//Route::post("/save", 'MainController@save');
+//Route::delete("/delete", 'MainController@delete');
+
+
+Route::get('/', function(){
+    return view('home');
+}) ;
+
+Route::group(['prefix' => 'busca'], function()
+{
+    Route::get('/', 'FrontEndController@pesquisas');
+    Route::get('/{key}', 'FrontEndController@busca');
+});

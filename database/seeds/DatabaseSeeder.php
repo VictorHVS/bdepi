@@ -22,7 +22,7 @@ class UsuariosSeeder extends Seeder
     public function run()
     {
         factory(\App\Usuario::class, 1)->create();
-        \app\Usuario::create(["nome" => "Lucas", "email" => "lucasnogueira@outlook.com.br", 'senha' => bcrypt(123), 'remember_token' => str_random(10)]);
+        \app\Usuario::create(["nome" => "Lucas Nogueira", "email" => "lucasnogueira@outlook.com.br", 'senha' => bcrypt(123), 'remember_token' => str_random(10)]);
     }
 }
 
@@ -30,7 +30,7 @@ class PesquisasSeeder extends Seeder
 {
     public function run()
     {
-        factory(\App\Pesquisa::class, 10)->create();
+        factory(\App\Pesquisa::class, 100)->create();
     }
 }
 

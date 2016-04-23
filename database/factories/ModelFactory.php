@@ -13,7 +13,7 @@
 
 $factory->define(App\Usuario::class, function (Faker\Generator $faker) {
     return [
-        'nome' => 'Victor',
+        'nome' => 'Victor Hugo Vieira de Sousa',
         'email' =>'vhv.sousa@gmail.com',
         'senha' => bcrypt(123),
         'remember_token' => str_random(10)
@@ -27,13 +27,13 @@ $factory->define(App\Dado::class, function (Faker\Generator $faker) {
         'nome' => $faker->text(10),
         'info' => $faker->realText(50),
         'valor' => $faker->realText(20),
-        'pesquisa_id' => rand(1, 10)
+        'pesquisa_id' => rand(1, 100)
     ];
 });
 
 $factory->define(App\Pesquisa::class, function (Faker\Generator $faker) {
     return [
-        'nome' => $faker->title,
+        'nome' => $faker->realText(20),
         'data_publicacao' => $faker->dateTimeAD,
         'resumo' => $faker->text(200),
         'is_publico' => rand(0, 1),

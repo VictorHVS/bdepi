@@ -12,7 +12,7 @@ class Usuario extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'nome', 'email', 'senha',
     ];
 
     /**
@@ -21,8 +21,16 @@ class Usuario extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'senha', 'remember_token',
     ];
 
     protected $table = 'usuarios';
+
+    public function pesquisas(){
+        return $this->hasMany(Pesquisa::class);
+    }
+
+    public function dados(){
+        return $this->hasManyThrough(Dado::class, Pesquisa::class);
+    }
 }

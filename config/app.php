@@ -158,6 +158,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Phaza\LaravelPostgis\DatabaseServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
     ],
 
     /*
