@@ -11,20 +11,32 @@
 |
 */
 
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->define(App\Usuario::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
-        'email' => $faker->safeEmail,
-        'password' => bcrypt(str_random(10)),
-        'remember_token' => str_random(10),
+        'nome' => 'Victor',
+        'email' =>'vhv.sousa@gmail.com',
+        'senha' => bcrypt(123),
+        'remember_token' => str_random(10)
     ];
 });
-$factory->define(App\Dados::class, function (Faker\Generator $faker) {
+
+$factory->define(App\Dado::class, function (Faker\Generator $faker) {
     return [
         'geom' => new \Phaza\LaravelPostgis\Geometries\Point($faker->latitude, $faker->longitude),
         'data_coleta' => $faker->dateTime,
         'nome' => $faker->text(10),
         'info' => $faker->realText(50),
-        'valor' => $faker->realText(20)
+        'valor' => $faker->realText(20),
+        'pesquisa_id' => rand(1, 10)
+    ];
+});
+
+$factory->define(App\Pesquisa::class, function (Faker\Generator $faker) {
+    return [
+        'nome' => $faker->title,
+        'data_publicacao' => $faker->dateTimeAD,
+        'resumo' => $faker->text(200),
+        'is_publico' => rand(0, 1),
+        'usuario_id' => rand(1, 2)
     ];
 });

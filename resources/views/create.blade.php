@@ -16,6 +16,11 @@
 
 <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.3/leaflet.draw.css' rel='stylesheet' />
 <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.3/leaflet.draw.js'></script>
+<script data-rocketsrc="//code.jquery.com/jquery-1.10.2.min.js" type="text/rocketscript"></script>
+
+<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
+<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
 
 <div id='map'></div>
 
@@ -74,11 +79,12 @@
 </div>
 
 <script>
+
     L.mapbox.accessToken = 'pk.eyJ1IjoidmljdG9yaHVnbyIsImEiOiJjaW15NWNvNXYwM3g0djdrazZjZjRqdmI4In0.A3O0p-zpU1Yn1AgmeKbnag';
     var map = L.mapbox.map('map', 'mapbox.streets')
         .setView([38.89399, -77.03659], 2);
 
-    var geojson = {!! $dados !!};
+    var geojson = {!! $dados !!}
     var geoJsonDeleted = [];
 
     var featureGroup = L.geoJson(geojson).addTo(map);
@@ -101,6 +107,54 @@
         featureGroup.addLayer(e.layer);
     });
 
+    var markers = L.markerClusterGroup();
+
+    var geoJsonLayer = L.geoJson(geojson, {
+        onEachFeature: function (feature, layer) {
+        }
+    });
+    markers.addLayer(geoJsonLayer);
+    map.addLayer(markers);
+    map.fitBounds(markers.getBounds());
+
+//    L.mapbox.accessToken = 'pk.eyJ1IjoidmljdG9yaHVnbyIsImEiOiJjaW15NWNvNXYwM3g0djdrazZjZjRqdmI4In0.A3O0p-zpU1Yn1AgmeKbnag';
+//    var map = L.mapbox.map('map', 'mapbox.streets')
+//        .setView([38.89399, -77.03659], 2);
+
+
+//    var geoJsonDeleted = [];
+//
+//    var featureGroup = L.featureGroup().addTo(map);
+//    var drawControl = new L.Control.Draw({
+//        edit: {
+//            featureGroup: featureGroup
+//        }
+//    }).addTo(map);
+//
+//    map.on('draw:created', function(e) {
+//        featureGroup.addLayer(e.layer);
+//    });
+//    map.on('draw:deleted', function (e) {
+//        var layers = e.layers;
+//        layers.eachLayer(function (layer) {
+//            //do whatever you want, most likely save back to db
+//            geoJsonDeleted.push(layer.feature);
+//        });
+//    });
+//    var markers = L.markerClusterGroup();
+//
+//    var geoJsonLayer = L.geoJson(geojson, {
+//        onEachFeature: function (feature, layer) {
+//            layer.bindPopup("AEHOOO!!!");
+//        }
+//    });
+//
+//    markers.addLayer(geoJsonLayer);
+//    map.addLayer(markers);
+//    map.fitBounds(markers.getBounds());
+
+
+
     jQuery(document).ready(function(){
         jQuery('#salvar').click(function(){
 
@@ -116,8 +170,6 @@
                     console.log("response: " + data + " status: " + status);
                 }
             });
-
-            //console.log(jsonDeleted);
 
             var dados = JSON.stringify(featureGroup.toGeoJSON());
                 jQuery.ajax({
