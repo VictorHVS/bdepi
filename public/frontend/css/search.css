@@ -99,3 +99,12 @@ a {
     background-color: coral;
     margin: 4px;
 }
+.form{
+    margin-top: 50px;
+}
+input{
+    border-radius: 0px !important;
+}
+.center{
+    margin: 0 auto;
+}
