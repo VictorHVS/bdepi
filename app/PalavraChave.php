@@ -14,6 +14,6 @@ class PalavraChave extends Model
 
     public function pesquisas()
     {
-        return $this->belongsToMany(Pesquisa::class, 'palavras_chaves');
+        return $this->belongsToMany(Pesquisa::class, 'pesquisas_chaves');
     }
 }

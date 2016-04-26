@@ -14,9 +14,9 @@
 // quando eu tava brincando
 //Route::get('/', [ 'as' => 'home', 'uses' => 'FrontEndController@home' ]) ;
 //
-//Route::get("/create", 'MainController@create');
-//Route::post("/save", 'MainController@save');
-//Route::delete("/delete", 'MainController@delete');
+Route::get("/create", 'MainController@create');
+Route::post("/save", 'MainController@save');
+Route::delete("/delete", 'MainController@delete');
 
 
 Route::get('/', function(){

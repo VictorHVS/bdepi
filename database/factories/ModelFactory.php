@@ -40,3 +40,9 @@ $factory->define(App\Pesquisa::class, function (Faker\Generator $faker) {
         'usuario_id' => rand(1, 2)
     ];
 });
+
+$factory->define(App\PalavraChave::class, function (Faker\Generator $faker) {
+    return [
+        'nome' => $faker->text(5)
+    ];
+});

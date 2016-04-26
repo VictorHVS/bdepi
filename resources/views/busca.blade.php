@@ -25,18 +25,19 @@
         @foreach ($pesquisas as $pesquisa)
         <!-- modelo card-->
         <div class="col-md-12  card">
-            <a href="#" class="card-title">{{ $pesquisa->nome }}</a><br>
+            <a href="#" class="card-title">[{{ $pesquisa->id }}] - {{ $pesquisa->nome }}</a><br>
             <p class="card-label">Autor:
             <p class="card-autor"> {{ $pesquisa->usuario->nome }}</p>
             </p>
             <p class="card-label">Postado em:
             <p class="date">{{ $pesquisa->data_publicacao }}</p>
             </p>
+
             <p class="card-description"></p>
 
-            <span class="label label-default">Default</span>
-            <span class="label label-default">Default1</span>
-            <span class="label label-default">Default2</span>
+            @foreach ($pesquisa->palavrasChave as $chave)
+            <span class="label label-default">{{ $chave->nome }}</span>
+            @endforeach
         </div>
         @endforeach
     </div>

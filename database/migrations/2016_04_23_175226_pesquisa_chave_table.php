@@ -14,9 +14,10 @@ class PesquisaChaveTable extends Migration
     {
         Schema::create('pesquisas_chaves', function (Blueprint $table) {
             $table->integer('pesquisa_id')->unsigned();
+            $table->integer('palavra_chave_id')->unsigned();
+
             $table->foreign('pesquisa_id')->references('id')->on('pesquisas');
-            $table->integer('palavras_chave_id')->unsigned();
-            $table->foreign('palavras_chave_id')->references('id')->on('palavras_chave');
+            $table->foreign('palavra_chave_id')->references('id')->on('palavras_chave');
         });
     }
 
