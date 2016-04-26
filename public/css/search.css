@@ -14,6 +14,7 @@ a {
     font-weight: bold;
     font-size: 29px;
 }
+
 .topbar {
     height: 50px;
     background-color: #e6e6e6;
@@ -100,29 +101,64 @@ a {
     font-size: 12px;
     display: inline;
 }
+
 .section-search {
     height: 80vh;
     width: 100%;
     background-color: #e6e6e6;
 }
+.card-resume{
+    text-align: justify;
+    margin-top: 20px;
+}
+
 .btn-card1 {
     border-radius: 0px !important;
     border: none;
     background-color: coral;
     margin: 7px;
 }
+
 .btn-card {
     border-radius: 0px !important;
     border: none;
     background-color: coral;
     margin: 4px;
 }
-.form{
+
+.form {
     margin-top: 50px;
 }
-input{
+
+input {
     border-radius: 0px !important;
 }
-.center{
+
+.center {
     margin: 0 auto;
+}
+
+
+/*page details*/
+.info{
+    margin-top: 25px;
+}
+.details {
+    overflow-y: auto;
+    max-height: 100vh;
+}
+.mapa{
+    height: 100vh;
+    padding: 0px !important;
+}
+#map {
+/*    position: fixed;*/
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100vh;
+}
+
+.detaisl {
+/*    background-color: mediumaquamarine;*/
 }
