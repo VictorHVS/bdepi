@@ -165,16 +165,19 @@ input {
 }
 
 #points {
-    background-color: #e6e6e6;
-    width: 200px;
+    background-color: #fff;
+    width: 250px;
     z-index: 10;
     position: absolute;
+/*
     right: 19px;
     top: 60px;
-    overflow-x: auto;
+*/
+    right: 0px;
+    top: 0px;
+    overflow: auto;
     margin: 0;
-/*    padding: 5px;*/
-    
+    height: 100vh;
 }
 
 .point-card {
@@ -182,12 +185,13 @@ input {
     width: 190px;
     margin-top: 5px;
     padding: 5px;
-    background-color: #fff;
+    background-color: #e6e6e6;
     text-align: center;
     font-size: 12;
     font-weight: bold;
     cursor: pointer;
-    margin: 5px 5px;;
+    margin: 5px 15px;
+    
 }
 
 .filter-ctrl {
