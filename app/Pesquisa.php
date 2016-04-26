@@ -12,7 +12,7 @@ class Pesquisa extends Model
         'nome',
         'data_publicacao',
         'resumo',
-        'is_publico',
+        'is_publico'
     ];
 
     public function usuario()

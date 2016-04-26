@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
 use App\Pesquisa;
-use DB;
+use App\Usuario;
+use Illuminate\Http\Request;
 
 class FrontEndController extends Controller
 {
@@ -14,17 +14,15 @@ class FrontEndController extends Controller
      */
     private $pesquisa;
 
-    public function  __construct(Pesquisa $pesquisa)
+    public function __construct(Pesquisa $pesquisa)
     {
         $this->pesquisa = $pesquisa;
     }
 
     public function busca($key)
     {
-        $cond = ['nome', 'like', "%" . $key ."%"];
-        $pesquisas = $this->pesquisa->where(["is_publico" => 1,  $cond] )->get();
-
-        //dd(json_encode($pesquisas));
+        $cond = ['nome', 'like', "%" . $key . "%"];
+        $pesquisas = $this->pesquisa->where(["is_publico" => 1, $cond])->get();
 
         return view('busca')->with("pesquisas", $pesquisas);
     }
@@ -33,9 +31,23 @@ class FrontEndController extends Controller
     {
         $pesquisas = $this->pesquisa->where("is_publico", 1)->get();
 
-        //dd(json_encode($pesquisas));
-
         return view('busca')->with("pesquisas", $pesquisas);
+    }
+
+    public function createPesquisa(Request $request)
+    {
+        //dd($request->get('titulo') . $request->get('resumo') . $request->get('palavras_chave'));
+
+        $pesquisa = new Pesquisa(
+            [
+                'nome' => $request->get('titulo'),
+                'resumo' => $request->get('resumo'),
+                'is_publico' => true
+            ]);
+
+        $user = Usuario::find(1);
+        $pesquisa->usuario = $user;
+        $pesquisa->save();
     }
 
 }

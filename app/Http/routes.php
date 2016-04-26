@@ -11,20 +11,26 @@
 |
 */
 
-// quando eu tava brincando
-//Route::get('/', [ 'as' => 'home', 'uses' => 'FrontEndController@home' ]) ;
-//
 Route::get("/create", 'MainController@create');
 Route::post("/save", 'MainController@save');
 Route::delete("/delete", 'MainController@delete');
 
+Route::group(['prefix' => 'busca'], function(){
+    Route::get('/', 'FrontEndController@pesquisas');
+    Route::get('/{key}', 'FrontEndController@busca');
+});
+
+Route::get('auth/login', 'Auth\AuthController@getLogin');
+Route::post('auth/login', 'Auth\AuthController@postLogin');
+Route::get('auth/logout', function(){
+    Auth::logout();
+});
+
+Route::post('/pesquisa/create', 'FrontEndController@createPesquisa');
+Route::get('/pesquisa/create', function(){
+    return view('pesquisa.create');
+});
 
 Route::get('/', function(){
     return view('home');
 }) ;
-
-Route::group(['prefix' => 'busca'], function()
-{
-    Route::get('/', 'FrontEndController@pesquisas');
-    Route::get('/{key}', 'FrontEndController@busca');
-});
