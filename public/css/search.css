@@ -107,7 +107,8 @@ a {
     width: 100%;
     background-color: #e6e6e6;
 }
-.card-resume{
+
+.card-resume {
     text-align: justify;
     margin-top: 20px;
 }
@@ -140,25 +141,76 @@ input {
 
 
 /*page details*/
-.info{
+
+.info {
     margin-top: 25px;
 }
+
 .details {
     overflow-y: auto;
     max-height: 100vh;
 }
-.mapa{
+
+.mapa {
     height: 100vh;
     padding: 0px !important;
 }
+
 #map {
-/*    position: fixed;*/
+    /*    position: fixed;*/
     top: 0;
     bottom: 0;
     width: 100%;
     height: 100vh;
 }
 
-.detaisl {
-/*    background-color: mediumaquamarine;*/
+#points {
+    background-color: #fff;
+    width: 250px;
+    z-index: 10;
+    position: absolute;
+/*
+    right: 19px;
+    top: 60px;
+*/
+    right: 0px;
+    top: 0px;
+    overflow: auto;
+    margin: 0;
+    height: 100vh;
+}
+
+.point-card {
+    min-height: 30px;
+    width: 190px;
+    margin-top: 5px;
+    padding: 5px;
+    background-color: #e6e6e6;
+    text-align: center;
+    font-size: 12;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 5px 15px;
+    
+}
+
+.filter-ctrl {
+    position: absolute;
+    top: 12px;
+    right: 20px;
+    z-index: 15;
+    width: 200px !important;
+}
+
+.filter-ctrl input[type=text] {
+    font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    width: 100%;
+    border: 0 !important;
+    background-color: #fff;
+    height: 40px !important;
+    margin: 0 !important;
+    color: rgba(0, 0, 0, .5) !important;
+    padding: 10px !important;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1) !important;
+    border-radius: 3px !important;
 }

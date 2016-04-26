@@ -22,7 +22,7 @@
     <div class="col-md-3 details">
 
         <div class="col-md-12 info">
-            <a href="#" class="card-title">Relato de Desenvolvimento de Plataforma de Gerência de Dados Espaciais</a>
+            <p class="card-title">Relato de Desenvolvimento de Plataforma de Gerência de Dados Espaciais</p>
             <br>
             <p class="card-label">Autores:
                 <p class="card-autor">Lucas Nogueira e Victor Hugo</p>
@@ -42,9 +42,15 @@
 
     </div>
     <div class="col-md-9 mapa">
+        <!--
+        <div class='filter-ctrl'>
+            <input id='filter-input' onkeyup="" type='text' name='filter' placeholder='Buscar por Campus' />
+        </div>
+-->
+        <div id="points"></div>
         <div id="map"></div>
     </div>
-    <div class="points"></div>
+
 
     <!--    </div>-->
 
@@ -58,12 +64,12 @@
                 "geometry": {
                     "type": "Point",
                     "coordinates": [
-               -42.8105416,  -5.0874444
+               -42.8105416, -5.0874444
             ]
                 },
                 "properties": {
-                    "title": "Maiores.",
-                    "description": "King said gravely, 'and go on till you come and.",
+                    "title": "Igreja Católica",
+                    "description": "Templo de Oração",
                     "id": 1,
                     "marker-color": "#fc9855",
                     "marker-size": "large"
@@ -78,10 +84,10 @@
             ]
                 },
                 "properties": {
-                    "title": "Enim.",
-                    "description": "Dormouse, not choosing to notice this last.",
+                    "title": "Igreja Baptista",
+                    "description": "Templo de Oração",
                     "id": 2,
-                    "marker-color": "#fc3436",
+                    "marker-color": "#fc9855",
                     "marker-size": "large"
                 }
     },
@@ -94,8 +100,8 @@
             ]
                 },
                 "properties": {
-                    "title": "Sint ut.",
-                    "description": "I shall be a great hurry. 'You did!' said the.",
+                    "title": "Gaspar",
+                    "description": "Entretenimento",
                     "id": 3,
                     "marker-color": "#fc1693",
                     "marker-size": "large"
@@ -107,9 +113,16 @@
         var map = L.mapbox.map('map', 'mapbox.streets').setView([-5.0884444, -42.8105416], 13);
         var layer = L.mapbox.featureLayer(geojson).addTo(map);
 
-        //        addPopup(){
-        //            
-        //        }
+        (function addPinInList() {
+            var divPoints = document.getElementById('points');
+            geojson.forEach(function (iten) {
+                divPoints.innerHTML = divPoints.innerHTML + '<div onclick="setView(' + iten.geometry.coordinates + ')" class="point-card">' + iten.properties.title + '</div>';
+            })
+        })();
+
+        function setView(a, b) {
+            map.setView([b, a], 15);
+        }
     </script>
 
 </body>
