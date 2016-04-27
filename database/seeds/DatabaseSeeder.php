@@ -1,5 +1,9 @@
 <?php
 
+use App\Models\Data;
+use App\Models\KeyWord;
+use App\Models\Research;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -11,41 +15,41 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(UsuariosSeeder::class);
-        $this->call(PesquisasSeeder::class);
-        $this->call(DadosSeeder::class);
-        $this->call(PalavraChavesSeeder::class);
+        $this->call(UsersSeeder::class);
+        $this->call(ResearchesSeeder::class);
+        $this->call(DatasSeeder::class);
+        $this->call(KeyWordsSeeder::class);
     }
 }
 
-class UsuariosSeeder extends Seeder
+class UsersSeeder extends Seeder
 {
     public function run()
     {
-        factory(\App\User::class, 1)->create();
-        \app\User::create(["name" => "Lucas Nogueira", "email" => "lucasnogueira@outlook.com.br", 'password' => bcrypt(123456), 'remember_token' => str_random(10)]);
+        factory(User::class, 1)->create();
+        User::create(["name" => "Lucas Nogueira", "email" => "lucasnogueira@outlook.com.br", 'password' => bcrypt("123456"), 'remember_token' => str_random(10)]);
     }
 }
 
-class PesquisasSeeder extends Seeder
+class ResearchesSeeder extends Seeder
 {
     public function run()
     {
-        factory(\App\Research::class, 100)->create();
+        factory(Research::class, 100)->create();
     }
 }
 
-class DadosSeeder extends Seeder
+class DatasSeeder extends Seeder
 {
     public function run()
     {
-        factory(\App\Data::class, 1000)->create();
+        factory(Data::class, 1000)->create();
     }
 }
-class PalavraChavesSeeder extends Seeder
+class KeyWordsSeeder extends Seeder
 {
     public function run()
     {
-        factory(\App\KeyWord::class, 50)->create();
+        factory(KeyWord::class, 50)->create();
     }
 }

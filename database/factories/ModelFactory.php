@@ -11,7 +11,12 @@
 |
 */
 
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+use App\Models\Data;
+use App\Models\KeyWord;
+use App\Models\Research;
+use App\Models\User;
+
+$factory->define(User::class, function (Faker\Generator $faker) {
     return [
         'name' => "Victor Hugo Vieira de Sousa",
         'email' => "vhv.sousa@gmail.com",
@@ -20,29 +25,29 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Data::class, function (Faker\Generator $faker) {
+$factory->define(Data::class, function (Faker\Generator $faker) {
     return [
         'geom' => new \Phaza\LaravelPostgis\Geometries\Point($faker->latitude, $faker->longitude),
-        'data_coleta' => $faker->dateTime,
-        'nome' => $faker->text(10),
+        'data_attain' => $faker->dateTime,
+        'title' => $faker->text(10),
         'info' => $faker->realText(50),
-        'valor' => $faker->realText(20),
-        'pesquisa_id' => rand(1, 100)
+        'value' => $faker->realText(20),
+        'research_id' => rand(1, 100)
     ];
 });
 
-$factory->define(App\Research::class, function (Faker\Generator $faker) {
+$factory->define(Research::class, function (Faker\Generator $faker) {
     return [
-        'nome' => $faker->realText(20),
-        'data_publicacao' => $faker->dateTimeAD,
-        'resumo' => $faker->text(200),
-        'is_publico' => rand(0, 1),
-        'usuario_id' => rand(1, 2)
+        'title' => $faker->realText(20),
+        'publish_date' => $faker->dateTimeAD,
+        'abstract' => $faker->text(200),
+        'is_public' => rand(0, 1),
+        'user_id' => rand(1, 2)
     ];
 });
 
-$factory->define(App\KeyWord::class, function (Faker\Generator $faker) {
+$factory->define(KeyWord::class, function (Faker\Generator $faker) {
     return [
-        'nome' => $faker->text(5)
+        'name' => $faker->text(5)
     ];
 });

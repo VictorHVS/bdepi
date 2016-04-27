@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateKeyResearchTable extends Migration
+class CreateKeyWordResearchTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class CreateKeyResearchTable extends Migration
      */
     public function up()
     {
-        Schema::create('key_research', function (Blueprint $table) {
+        Schema::create('key_word_research', function (Blueprint $table) {
             $table->integer('research_id')->unsigned();
             $table->integer('key_word_id')->unsigned();
 
@@ -28,6 +28,6 @@ class CreateKeyResearchTable extends Migration
      */
     public function down()
     {
-        Schema::drop('key_research');
+        Schema::drop('key_word_research');
     }
 }
