@@ -22,8 +22,8 @@ class UsuariosSeeder extends Seeder
 {
     public function run()
     {
-        factory(\App\Usuario::class, 1)->create();
-        \app\Usuario::create(["nome" => "Lucas Nogueira", "email" => "lucasnogueira@outlook.com.br", 'senha' => bcrypt(123456), 'remember_token' => str_random(10)]);
+        factory(\App\User::class, 1)->create();
+        \app\User::create(["name" => "Lucas Nogueira", "email" => "lucasnogueira@outlook.com.br", 'password' => bcrypt(123456), 'remember_token' => str_random(10)]);
     }
 }
 

@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Usuario extends Authenticatable
+class User extends Authenticatable
 {
     /**
      * The attributes that are mass assignable.
@@ -12,7 +12,7 @@ class Usuario extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'nome', 'email', 'senha',
+        'name', 'email', 'password',
     ];
 
     /**
@@ -21,10 +21,10 @@ class Usuario extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'senha', 'remember_token',
+        'password', 'remember_token',
     ];
 
-    protected $table = 'usuarios';
+    protected $table = 'users';
 
     public function pesquisas(){
         return $this->hasMany(Pesquisa::class);

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePalavrasChaveTable extends Migration
+class CreateKeyWordsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,9 @@ class CreatePalavrasChaveTable extends Migration
      */
     public function up()
     {
-        Schema::create('palavras_chave', function (Blueprint $table) {
+        Schema::create('key_words', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nome');
-
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ class CreatePalavrasChaveTable extends Migration
      */
     public function down()
     {
-        Schema::drop('palavras_chave');
+        Schema::drop('key_words');
     }
 }

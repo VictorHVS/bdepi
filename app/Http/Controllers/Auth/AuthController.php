@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Usuario;
+use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -11,15 +11,15 @@ use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 class AuthController extends Controller
 {
     /*
-    |--------------------------------------------------------------------------
-    | Registration & Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users, as well as the
-    | authentication of existing users. By default, this controller uses
-    | a simple trait to add these behaviors. Why don't you explore it?
-    |
-    */
+   |--------------------------------------------------------------------------
+   | Registration & Login Controller
+   |--------------------------------------------------------------------------
+   |
+   | This controller handles the registration of new users, as well as the
+   | authentication of existing users. By default, this controller uses
+   | a simple trait to add these behaviors. Why don't you explore it?
+   |
+   */
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
@@ -49,9 +49,9 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'nome' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:usuarios',
-            'senha' => 'required|min:6|confirmed',
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'required|min:6|confirmed',
         ]);
     }
 
@@ -59,14 +59,14 @@ class AuthController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return Usuario
+     * @return User
      */
     protected function create(array $data)
     {
-        return Usuario::create([
-            'nome' => $data['nome'],
+        return User::create([
+            'name' => $data['name'],
             'email' => $data['email'],
-            'senha' => bcrypt($data['senha']),
+            'password' => bcrypt($data['password']),
         ]);
     }
 }

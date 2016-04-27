@@ -1327,7 +1327,7 @@ namespace {
         /**
          * Get the currently authenticated user.
          *
-         * @return \App\Usuario|null 
+         * @return \App\User|null
          * @static 
          */
         public static function user(){
@@ -1431,7 +1431,7 @@ namespace {
          *
          * @param mixed $id
          * @param bool $remember
-         * @return \App\Usuario 
+         * @return \App\User
          * @static 
          */
         public static function loginUsingId($id, $remember = false){
@@ -1536,7 +1536,7 @@ namespace {
         /**
          * Return the currently cached user.
          *
-         * @return \App\Usuario|null 
+         * @return \App\User|null
          * @static 
          */
         public static function getUser(){
@@ -1578,7 +1578,7 @@ namespace {
         /**
          * Get the last user we attempted to authenticate.
          *
-         * @return \App\Usuario 
+         * @return \App\User
          * @static 
          */
         public static function getLastAttempted(){

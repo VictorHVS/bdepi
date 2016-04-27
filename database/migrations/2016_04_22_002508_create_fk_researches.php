@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRelacionamentoPesquisas extends Migration
+class CreateFkResearches extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,8 @@ class CreateRelacionamentoPesquisas extends Migration
      */
     public function up()
     {
-        Schema::table('pesquisas', function (Blueprint $table) {
-            $table->foreign('usuario_id','pesquisa_fk_usuario')->references('id')->on('usuarios');
+        Schema::table('researches', function (Blueprint $table) {
+            $table->foreign('user_id','research_fk_user')->references('id')->on('users');
         });
     }
 
@@ -24,8 +24,8 @@ class CreateRelacionamentoPesquisas extends Migration
      */
     public function down()
     {
-        Schema::table('pesquisas', function (Blueprint $table) {
-            $table->dropForeign('pesquisa_fk_usuario');
+        Schema::table('researches', function (Blueprint $table) {
+            $table->dropForeign('research_fk_user');
         });
     }
 }

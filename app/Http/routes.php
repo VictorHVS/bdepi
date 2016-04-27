@@ -34,3 +34,10 @@ Route::get('/pesquisa/create', function(){
 Route::get('/', function(){
     return view('home');
 }) ;
+Route::auth();
+
+Route::get('/home', 'HomeController@index');
+
+Route::auth();
+
+Route::get('/home', 'HomeController@index');

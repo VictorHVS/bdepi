@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Pesquisa;
-use App\Usuario;
+use App\User;
 use Illuminate\Http\Request;
 
 class FrontEndController extends Controller
@@ -29,9 +29,16 @@ class FrontEndController extends Controller
 
     public function pesquisas()
     {
-        $pesquisas = $this->pesquisa->where("is_publico", 1)->get();
 
-        return view('busca')->with("pesquisas", $pesquisas);
+        if(\Auth::attempt(["email" => "vhv.sousa@gmail.com", "senha" => "123456"])){
+            dd("Logado");
+        }else{
+            dd("não logado");
+        }
+
+//        $pesquisas = $this->pesquisa->where("is_publico", 1)->get();
+//
+//        return view('busca')->with("pesquisas", $pesquisas);
     }
 
     public function createPesquisa(Request $request)
@@ -40,12 +47,13 @@ class FrontEndController extends Controller
 
         $pesquisa = new Pesquisa(
             [
+                'usuario_id' => 1,
                 'nome' => $request->get('titulo'),
                 'resumo' => $request->get('resumo'),
                 'is_publico' => true
             ]);
 
-        $user = Usuario::find(1);
+        $user = User::find(1);
         $pesquisa->usuario = $user;
         $pesquisa->save();
     }

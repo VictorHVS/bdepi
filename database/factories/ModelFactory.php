@@ -11,12 +11,12 @@
 |
 */
 
-$factory->define(App\Usuario::class, function (Faker\Generator $faker) {
+$factory->define(App\User::class, function (Faker\Generator $faker) {
     return [
-        'nome' => 'Victor Hugo Vieira de Sousa',
-        'email' =>'vhv.sousa@gmail.com',
-        'senha' => bcrypt(123456),
-        'remember_token' => str_random(10)
+        'name' => "Victor Hugo Vieira de Sousa",
+        'email' => "vhv.sousa@gmail.com",
+        'password' => bcrypt("123456"),
+        'remember_token' => str_random(10),
     ];
 });
 
