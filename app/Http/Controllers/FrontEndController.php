@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Pesquisa;
+use App\Research;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -10,11 +10,11 @@ class FrontEndController extends Controller
 {
 
     /**
-     * @var Pesquisa
+     * @var Research
      */
     private $pesquisa;
 
-    public function __construct(Pesquisa $pesquisa)
+    public function __construct(Research $pesquisa)
     {
         $this->pesquisa = $pesquisa;
     }
@@ -45,7 +45,7 @@ class FrontEndController extends Controller
     {
         //dd($request->get('titulo') . $request->get('resumo') . $request->get('palavras_chave'));
 
-        $pesquisa = new Pesquisa(
+        $pesquisa = new Research(
             [
                 'usuario_id' => 1,
                 'nome' => $request->get('titulo'),

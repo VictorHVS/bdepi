@@ -27,10 +27,10 @@ class User extends Authenticatable
     protected $table = 'users';
 
     public function pesquisas(){
-        return $this->hasMany(Pesquisa::class);
+        return $this->hasMany(Research::class);
     }
 
     public function dados(){
-        return $this->hasManyThrough(Dado::class, Pesquisa::class);
+        return $this->hasManyThrough(Data::class, Research::class);
     }
 }

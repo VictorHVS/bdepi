@@ -20,7 +20,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Dado::class, function (Faker\Generator $faker) {
+$factory->define(App\Data::class, function (Faker\Generator $faker) {
     return [
         'geom' => new \Phaza\LaravelPostgis\Geometries\Point($faker->latitude, $faker->longitude),
         'data_coleta' => $faker->dateTime,
@@ -31,7 +31,7 @@ $factory->define(App\Dado::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Pesquisa::class, function (Faker\Generator $faker) {
+$factory->define(App\Research::class, function (Faker\Generator $faker) {
     return [
         'nome' => $faker->realText(20),
         'data_publicacao' => $faker->dateTimeAD,
@@ -41,7 +41,7 @@ $factory->define(App\Pesquisa::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\PalavraChave::class, function (Faker\Generator $faker) {
+$factory->define(App\KeyWord::class, function (Faker\Generator $faker) {
     return [
         'nome' => $faker->text(5)
     ];

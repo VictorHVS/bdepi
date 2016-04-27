@@ -6,26 +6,27 @@ use Illuminate\Database\Eloquent\Model;
 use Phaza\LaravelPostgis\Eloquent\PostgisTrait;
 use Phaza\LaravelPostgis\Geometries\Point;
 
-class Dado extends Model
+class Data extends Model
 {
     use PostgisTrait;
 
-    protected $table = 'dados';
+    protected $table = 'datas';
 
     protected $fillable = [
-        'nome',
-        'data_coleta',
+        'title',
         'info',
-        'valor',
-        'geom'
+        'value',
+        'geom',
+        'research_id',
+        'data_attain',
     ];
 
     protected $postgisFields = [
         'geom' => Point::class
     ];
 
-    public function pesquisa()
+    public function research()
     {
-        return $this->belongsTo(Pesquisa::class);
+        return $this->belongsTo(Research::class);
     }
 }
