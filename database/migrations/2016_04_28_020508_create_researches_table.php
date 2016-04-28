@@ -17,7 +17,7 @@ class CreateResearchesTable extends Migration
             $table->timestamps();
             $table->date('publish_date')->nullable();
             $table->string('title');
-            $table->string('abstract')->nullable();
+            $table->longText('abstract')->nullable();
             $table->boolean('is_public');
             $table->integer('user_id')->unsigned();
         });

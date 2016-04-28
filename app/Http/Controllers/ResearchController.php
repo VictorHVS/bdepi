@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Research;
-use Illuminate\Http\Request;
-
 use App\Http\Requests;
-use Illuminate\Routing\Route;
+use App\Research;
+use App\Services\KeywordService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ResearchController extends Controller
@@ -15,10 +14,15 @@ class ResearchController extends Controller
      * @var Research
      */
     private $pesquisa;
+    /**
+     * @var KeywordService
+     */
+    private $keywordService;
 
-    public function __construct(Research $pesquisa)
+    public function __construct(Research $pesquisa, KeywordService $keywordService)
     {
         $this->pesquisa = $pesquisa;
+        $this->keywordService = $keywordService;
     }
 
     /**
@@ -26,9 +30,18 @@ class ResearchController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $researches = $this->pesquisa->where("is_public", 1)->get();
+        $title = $request->get("k");
+
+        if(isset($title)){
+            $title = $request->get("k");
+            $cond = ['title', 'ilike', "%" . $title . "%"];
+            $researches = $this->pesquisa->where(["is_public" => 1, $cond])->orderBy('created_at', 'desc')->get();
+        }else{
+            $researches = $this->pesquisa->where("is_public", 1)->orderBy('created_at', 'desc')->get();
+        }
+
         return view('researches.result')->with("researches", $researches);
     }
 
@@ -56,9 +69,13 @@ class ResearchController extends Controller
         $research->abstract = $request->get('abstract');
         $research->is_public = 1;
         $research->user_id = Auth::user()->id;
-        $research->save();
 
-        //todo chamar tela de detalhes desta pesquisa
+        $keys = explode(";", $request->get('key_words'));
+        $keys = $this->keywordService->save($keys);
+
+        $research->save();
+        $research->keyWords()->sync($keys);
+
         return redirect()->action('ResearchController@show', ['id' => $research->id]);
     }
 
@@ -71,7 +88,6 @@ class ResearchController extends Controller
     public function show($id)
     {
         $research = $this->pesquisa->find($id);
-
         return view('researches.detail')->with(["research" => $research, 'data' => $this->toGeoJSON($research->data)]);
     }
 

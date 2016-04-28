@@ -20,4 +20,4 @@ Route::auth();
 Route::get('/home', 'HomeController@index');
 
 Route::resource('research', 'ResearchController');
-
+Route::resource('keyword', 'KeywordController');

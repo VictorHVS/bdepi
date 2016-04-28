@@ -50,9 +50,6 @@
             <p class="date">{{ $research->created_at }}</p>
             </p>
             <p class="card-description"></p>
-            <span class="label label-default">PALAVRA CHAVE</span>
-            <span class="label label-default">key word</span>
-            <span class="label label-default">tag</span>
             @foreach ($research->keyWords as $key)
             <span class="label label-default">{{ $key->name }}</span>
             @endforeach
