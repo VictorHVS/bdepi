@@ -15,14 +15,29 @@
     </div>
     <div class="col-md-4">
         <div class="col-md-12 navbar-right">
-            <button onclick="callNovo()" class="btn btn-card navbar-right">Novo</button>
+            <ul class="nav navbar-nav navbar-right">
+                <!-- Authentication Links -->
+                @if (Auth::guest())
+                <li><a href="{{ url('/login') }}">Login</a></li>
+                <li><a href="{{ url('/register') }}">Register</a></li>
+                @else
+                <button onclick="callNovo()" class="btn btn-card1 navbar-right">Nova Pesquisa</button>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        {{ Auth::user()->name }} <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                    </ul>
+                </li>
+                @endif
+            </ul>
         </div>
     </div>
 </div>
 
 <div class="col-md-10 col-md-offset-1">
     <div class="col-md-12">
-
         @foreach ($researches as $research)
         <!-- modelo card-->
         <div class="col-md-12  card">
@@ -31,9 +46,12 @@
             <p class="card-autor"> {{ $research->user->name }}</p>
             </p>
             <p class="card-label">Postado em:
-            <p class="date">{{ $research->date_publish }}</p>
+            <p class="date">{{ $research->created_at }}</p>
             </p>
             <p class="card-description"></p>
+            <span class="label label-default">PALAVRA CHAVE</span>
+            <span class="label label-default">key word</span>
+            <span class="label label-default">tag</span>
             @foreach ($research->keyWords as $key)
             <span class="label label-default">{{ $key->name }}</span>
             @endforeach

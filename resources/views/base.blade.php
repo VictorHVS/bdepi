@@ -35,8 +35,7 @@
     });
 
     function callNovo() {
-        var url = window.location.href.replace('index.html', 'create.html')
-        window.location.replace(url);
+        window.open('{{ url('/research/create') }}','_self')
     }
 </script>
 

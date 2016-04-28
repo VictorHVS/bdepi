@@ -6,6 +6,8 @@ use App\Research;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Auth;
 
 class ResearchController extends Controller
 {
@@ -37,7 +39,7 @@ class ResearchController extends Controller
      */
     public function create()
     {
-        //
+        return view('researches.create');
     }
 
     /**
@@ -46,9 +48,17 @@ class ResearchController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    //todo validar dados do form e retornar erros
     public function store(Request $request)
     {
-        //
+        $research = new Research();
+        $research->title = $request->get('title');
+        $research->abstract = $request->get('abstract');
+        $research->is_public = 1;
+        $research->user_id = Auth::user()->id;
+        $research->save();
+        //todo chamar tela de detalhes desta pesquisa
+        $this->index();
     }
 
     /**
