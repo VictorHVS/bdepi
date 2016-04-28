@@ -30,7 +30,9 @@
         <input id='filter-input' onkeyup="" type='text' name='filter' placeholder='Buscar por Campus' />
     </div>
 -->
-    <div id="points"></div>
+    <div id="points">
+        <div class="info-title">Pontos Cadastrados</div>
+    </div>
     <div id="map"></div>
 </div>
 
