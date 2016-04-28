@@ -24,7 +24,7 @@
         if (key) {
             //key = key.replace(" ", "+");
             //var url = window.location.href.replace('index.html','/busca/?q=')
-            window.location.replace("/busca/" + key + '');
+            window.location.replace("/research/" + key + '');
         }
     }
 
