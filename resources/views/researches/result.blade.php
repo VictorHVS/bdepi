@@ -41,7 +41,8 @@
         @foreach ($researches as $research)
         <!-- modelo card-->
         <div class="col-md-12  card">
-            <a href="#" class="card-title">[{{ $research->id }}] - {{ $research->title }}</a><br>
+            <!-- todo mandar pra tela de detail-->
+            <a href="<?php echo '/research/' . $research->id ?>" class="card-title">[{{ $research->id }}] - {{ $research->title }}</a><br>
             <p class="card-label">Autor:
             <p class="card-autor"> {{ $research->user->name }}</p>
             </p>

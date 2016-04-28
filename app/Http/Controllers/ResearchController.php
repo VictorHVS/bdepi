@@ -57,8 +57,9 @@ class ResearchController extends Controller
         $research->is_public = 1;
         $research->user_id = Auth::user()->id;
         $research->save();
+
         //todo chamar tela de detalhes desta pesquisa
-        $this->index();
+        return redirect()->action('ResearchController@show', ['id' => $research->id]);
     }
 
     /**
@@ -69,7 +70,9 @@ class ResearchController extends Controller
      */
     public function show($id)
     {
-        //
+        $research = $this->pesquisa->find($id);
+
+        return view('researches.detail')->with(["research" => $research, 'data' => $this->toGeoJSON($research->data)]);
     }
 
     /**
@@ -104,5 +107,47 @@ class ResearchController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    function toGeoJSON($dados)
+    {
+        $features = array();
+
+        foreach ($dados as $key => $value) {
+            $features[] = array(
+                'type' => 'Feature',
+                'geometry' => $value->geom,
+                'properties' => array(
+                    'title' => $value->title,
+                    'description' => $value->info,
+                    'id' => $value->id,
+                    'marker-color' => "#fc" . rand(1, 9999),
+                    'marker-size' => "large"
+                )
+            );
+        };
+
+        return json_encode($features, JSON_PRETTY_PRINT);
+    }
+
+    function toFeatureGroup($dados)
+    {
+        $features = array();
+
+        foreach ($dados as $key => $value) {
+            $features[] = array(
+                'type' => 'Feature',
+                'geometry' => $value->geom,
+                'properties' => array(
+                    'title' => $value->nome,
+                    'description' => $value->info,
+                    'id' => $value->id,
+                    'marker-color' => "#fc" . rand(1, 9999),
+                    'marker-size' => "large"
+                )
+            );
+        };
+
+        return json_encode($features, JSON_PRETTY_PRINT);
     }
 }

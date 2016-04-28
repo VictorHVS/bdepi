@@ -25,4 +25,9 @@ class Research extends Model
     {
         return $this->belongsToMany(KeyWord::class);
     }
+
+    public function data()
+    {
+        return $this->hasMany(Data::class);
+    }
 }
