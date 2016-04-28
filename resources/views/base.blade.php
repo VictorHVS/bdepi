@@ -24,7 +24,7 @@
         if (key) {
             //key = key.replace(" ", "+");
             //var url = window.location.href.replace('index.html','/busca/?q=')
-            window.location.replace("/busca/" + key + '');
+            window.location.replace("/research?k=" + key + '');
         }
     }
 
@@ -35,8 +35,7 @@
     });
 
     function callNovo() {
-        var url = window.location.href.replace('index.html', 'create.html')
-        window.location.replace(url);
+        window.open('{{ url('/research/create') }}','_self')
     }
 </script>
 

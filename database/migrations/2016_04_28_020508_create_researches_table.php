@@ -14,12 +14,12 @@ class CreateResearchesTable extends Migration
     {
         Schema::create('researches', function (Blueprint $table) {
             $table->increments('id');
+            $table->timestamps();
             $table->date('publish_date')->nullable();
             $table->string('title');
-            $table->string('abstract')->nullable();
+            $table->longText('abstract')->nullable();
             $table->boolean('is_public');
             $table->integer('user_id')->unsigned();
-            $table->timestamps();
         });
     }
 
@@ -30,6 +30,6 @@ class CreateResearchesTable extends Migration
      */
     public function down()
     {
-        Schema::drop("researches");
+        Schema::drop('researches');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,5 +24,10 @@ class Research extends Model
     public function keyWords()
     {
         return $this->belongsToMany(KeyWord::class);
+    }
+
+    public function data()
+    {
+        return $this->hasMany(Data::class);
     }
 }

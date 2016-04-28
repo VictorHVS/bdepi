@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Phaza\LaravelPostgis\Eloquent\PostgisTrait;
@@ -22,7 +22,7 @@ class Data extends Model
     ];
 
     protected $postgisFields = [
-        'geom' => Point::class
+        'geom' => Point::class,
     ];
 
     public function research()

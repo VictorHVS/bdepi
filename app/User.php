@@ -1,11 +1,14 @@
 <?php
 
-namespace App\Models;
+namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+
+    protected $table = 'users';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -24,13 +27,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    protected $table = 'users';
-
-    public function pesquisas(){
+    public function researches(){
         return $this->hasMany(Research::class);
     }
 
-    public function dados(){
+    public function datas(){
         return $this->hasManyThrough(Data::class, Research::class);
     }
 }

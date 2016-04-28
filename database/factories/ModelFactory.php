@@ -11,21 +11,16 @@
 |
 */
 
-use App\Models\Data;
-use App\Models\KeyWord;
-use App\Models\Research;
-use App\Models\User;
-
-$factory->define(User::class, function (Faker\Generator $faker) {
+$factory->define(App\User::class, function (Faker\Generator $faker) {
     return [
-        'name' => "Victor Hugo Vieira de Sousa",
-        'email' => "vhv.sousa@gmail.com",
-        'password' => bcrypt("123456"),
+        'name' => 'Victor Hugo',
+        'email' => 'vhv.sousa@gmail.com',
+        'password' => bcrypt('123456'),
         'remember_token' => str_random(10),
     ];
 });
 
-$factory->define(Data::class, function (Faker\Generator $faker) {
+$factory->define(App\Data::class, function (Faker\Generator $faker) {
     return [
         'geom' => new \Phaza\LaravelPostgis\Geometries\Point($faker->latitude, $faker->longitude),
         'data_attain' => $faker->dateTime,
@@ -36,7 +31,7 @@ $factory->define(Data::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(Research::class, function (Faker\Generator $faker) {
+$factory->define(App\Research::class, function (Faker\Generator $faker) {
     return [
         'title' => $faker->realText(20),
         'publish_date' => $faker->dateTimeAD,
@@ -46,7 +41,7 @@ $factory->define(Research::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(KeyWord::class, function (Faker\Generator $faker) {
+$factory->define(App\KeyWord::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->text(5)
     ];
