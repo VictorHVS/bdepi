@@ -131,7 +131,7 @@ a {
     margin-top: 50px;
 }
 
-input {
+input, textarea{
     border-radius: 0px !important;
 }
 
@@ -166,7 +166,7 @@ input {
 
 #points {
     background-color: #fff;
-    width: 250px;
+    width: 230px;
     z-index: 10;
     position: absolute;
 /*
@@ -192,6 +192,13 @@ input {
     cursor: pointer;
     margin: 5px 15px;
     
+}
+.info-title{
+    margin: 15px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 16px;
+    text-align: center;
 }
 
 .filter-ctrl {

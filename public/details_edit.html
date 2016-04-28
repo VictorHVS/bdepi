@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>BDEPI - Banco de Dados Espaciais do Piuaí</title>
+
+    <!--  leaflex  -->
+    <script src="/path/to/leaflet.js"></script>
+
+    <!--  bookmarks  -->
+    <script src="/path/to/Leaflet.Bookmarks.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="/path/to/leaflet.bookmarks.css">
+
+    <!--  custom css  -->
+    <link rel="stylesheet" href="css/search.css">
+
+    <!--  mapbox  -->
+    <script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
+    <link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
+
+    <!--  menu de contexto  -->
+    <!--    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>-->
+    <script src="dist/leaflet.contextmenu.js"></script>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+    <link rel="stylesheet" href="dist/leaflet.contextmenu.css" />
+
+    <!--  CDN Jquery  -->
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
+
+    <!--  Bootstrap  -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+</head>
+
+<body>
+    <div id="lat" style="display:none;"></div>
+    <div id="lng" style="display:none;"></div>
+
+    <div class="col-md-3 details">
+        <strong></strong>
+        <div class="col-md-12 info">
+            <p class="card-title">Relato de Desenvolvimento de Plataforma de Gerência de Dados Espaciais</p>
+            <br>
+            <p class="card-label">Autores:
+                <p class="card-autor">Lucas Nogueira e Victor Hugo</p>
+            </p>
+            <p class="card-label">Postado em:
+                <p class="date">10/09/2015</p>
+            </p>
+            <p class="card-description"></p>
+
+            <span class="label label-default">Default</span>
+            <span class="label label-default">Default1</span>
+            <span class="label label-default">Default2</span>
+
+            <p class="card-resume">Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis. Suco de cevadiss, é um leite divinis, qui tem lupuliz, matis, aguis e fermentis. Interagi no mé, cursus quis, vehicula ac nisi. Aenean vel dui dui. Nullam leo erat, aliquet quis tempus a, posuere ut mi. Ut scelerisque neque et turpis posuere pulvinar pellentesque nibh ullamcorper. Pharetra in mattis molestie, volutpat elementum justo. Aenean ut ante turpis. Pellentesque laoreet mé vel lectus sceleris</p>
+        </div>
+
+
+    </div>
+    <div class="col-md-9 mapa">
+        <div id="points">
+            <div class="info-title">Pontos Cadastrados</div>
+        </div>
+        <div id="map"></div>
+    </div>
+
+    <div id="map"></div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="addDataModal" tabindex="-1">
+        <div class="modal-dialog" role="document">
+            <!-- Modal de cadastro de dados -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Adicionar novo dado <p id="latlng" class="card-label">asd</p></h4>
+                </div>
+                <div class="modal-body">
+
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Nome do dado</label>
+                            <div class="col-sm-9">
+                                <input id='data_title' type="text" class="form-control" placeholder="Ex.: Empresa X, Ponte Y, Lago Z">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Data da coleta</label>
+                            <div class="col-sm-9">
+                                <input id='data_date' type="text" class="form-control" placeholder="dd-mm-yyyy">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Descrição</label>
+                            <div class="col-sm-9">
+                                <textarea id='data_info' name="info" class="form-control" rows="4" placeholder="Ex.: Local de foco de mosquito"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Valor dado</label>
+                            <div class="col-sm-9">
+                                <input id='data_value' type="text" class="form-control" placeholder="Ex.: 12%, 4 eventos, 43 ml">
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button onclick="saveData()" type="button" class="btn btn-primary">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var geojson = [];
+        var currentGeoJson = [];
+
+        var mark = {};
+        ll = new L.LatLng(-5.0884444, -42.8105416);
+        L.mapbox.accessToken = 'pk.eyJ1IjoidmljdG9yaHVnbyIsImEiOiJjaW15NWNvNXYwM3g0djdrazZjZjRqdmI4In0.A3O0p-zpU1Yn1AgmeKbnag';
+        var map = L.mapbox.map('map', 'mapbox.streets', {
+            center: ll,
+            zoom: 10,
+            contextmenu: true,
+            contextmenuWidth: 140,
+            contextmenuItems: [{
+                text: 'Adiconar Dado',
+                //                icon: 'images/zoom-in.png',
+                callback: addData
+	      }]
+        }).setView([-5.0884444, -42.8105416], 13);
+        var layer = L.mapbox.featureLayer(geojson).addTo(map);
+
+        function addData(e) {
+            $('#latlng').text(e.latlng);
+            mark.geometry = {};
+            mark.geometry.coordinates = [e.latlng.lat, e.latlng.lng];
+            $('#addDataModal').modal('show');
+
+        }
+
+        function saveData() {
+
+            mark.type = "Feature";
+            mark.geometry.type = "Point";
+            mark.properties = {
+                "title": $('#data_title').val(),
+                "description": $('#data_info').val(),
+                "marker-color": "#fc1693",
+                "marker-size": "large"
+            }
+            currentGeoJson.push(mark);
+            L.marker(mark.geometry.coordinates, {
+                    title: mark.properties.title,
+                    description: mark.properties.description
+                })
+                .bindPopup('<strong>' + mark.properties.title + '</strong><br/>' + mark.properties.description)
+                .addTo(map);
+            //            map.removeLayer(layer);
+            //            layer = L.mapbox.featureLayer(geojson).addTo(map);
+
+            //            console.log(currentGeoJson);
+            //            console.log(layer.getGeoJSON());
+
+            mark = {};
+            $.ajax({
+                type: "POST",
+                url: "/save",
+                data: currentGeoJson,
+                error: function (xhr, status, error) {
+                    console.log(error + " status: " + status);
+                },
+                success: function (data, status) {
+                    console.log("response: " + data + " status: " + status);
+
+                }
+            });
+            pointInfo();
+            $('#addDataModal').modal('hide');
+        }
+
+
+        function pointInfo() {
+            var divPoints = document.getElementById('points');
+            var iten = currentGeoJson[currentGeoJson.length-1];
+            divPoints.innerHTML = divPoints.innerHTML + '<div onclick="setView(' + iten.geometry.coordinates + ')" class="point-card">' + iten.properties.title + '</div>';
+
+        }
+
+        function setView(a, b) {
+            map.setView([a, b], 15);
+        }
+    </script>
+
+</body>
+
+</html>
