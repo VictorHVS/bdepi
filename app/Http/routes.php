@@ -21,3 +21,6 @@ Route::get('/home', 'HomeController@index');
 
 Route::resource('research', 'ResearchController');
 Route::resource('keyword', 'KeywordController');
+Route::resource('data', 'DataController');
+
+Route::post('/data/save', 'DataController@save');

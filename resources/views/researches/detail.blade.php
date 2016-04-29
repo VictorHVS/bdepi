@@ -40,11 +40,11 @@
 
 <script>
     L.mapbox.accessToken = 'pk.eyJ1IjoidmljdG9yaHVnbyIsImEiOiJjaW15NWNvNXYwM3g0djdrazZjZjRqdmI4In0.A3O0p-zpU1Yn1AgmeKbnag';
+    var map = L.mapbox.map('map', 'mapbox.streets')
+        .setView([38.89399, -77.03659], 2);
 
-    //atribui nessa variável geojson os dados espaciais
-    var geojson = {{$data}};
+    var geojson = {!! $data !!};
 
-    var map = L.mapbox.map('map', 'mapbox.streets').setView([-5.0884444, -42.8105416], 1);
     var layer = L.mapbox.featureLayer(geojson).addTo(map);
 
     (function addPinInList() {
@@ -57,6 +57,15 @@
     function setView(a, b) {
         map.setView([b, a], 15);
     }
+
+    function setEdit(layer) {
+        var drawControl = new L.Control.Draw({
+            edit: {
+                featureGroup: layer
+            }
+        }).addTo(map);
+    }
+
 </script>
 
 @endsection

@@ -88,7 +88,14 @@ class ResearchController extends Controller
     public function show($id)
     {
         $research = $this->pesquisa->find($id);
-        return view('researches.detail')->with(["research" => $research, 'data' => $this->toGeoJSON($research->data)]);
+
+        if(Auth::check())
+            $userId = Auth::user()->id;
+
+        if(Auth::check() && $research->user_id == $userId)
+            return view('researches.detail_edit')->with(["research" => $research, 'data' => $this->toGeoJSON($research->data)]);
+        else
+            return view('researches.detail')->with(["research" => $research, 'data' => $this->toGeoJSON($research->data)]);
     }
 
     /**
@@ -136,14 +143,12 @@ class ResearchController extends Controller
                 'properties' => array(
                     'title' => $value->title,
                     'description' => $value->info,
-                    'id' => $value->id,
-                    'marker-color' => "#fc" . rand(1, 9999),
-                    'marker-size' => "large"
+                    'id' => $value->id
                 )
             );
         };
 
-        return json_encode($features, JSON_PRETTY_PRINT);
+        return json_encode($features);
     }
 
     function toFeatureGroup($dados)
@@ -157,9 +162,7 @@ class ResearchController extends Controller
                 'properties' => array(
                     'title' => $value->nome,
                     'description' => $value->info,
-                    'id' => $value->id,
-                    'marker-color' => "#fc" . rand(1, 9999),
-                    'marker-size' => "large"
+                    'id' => $value->id
                 )
             );
         };
